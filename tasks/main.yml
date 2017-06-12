@@ -2,7 +2,11 @@
 - include: nexus_purge.yml
   when: ((purge is defined) and (purge | bool))
 
-- include: nexus_install.yml
+#- include: nexus_install.yml
+- include: my_nexus_install.yml tags=nexus_install
+
+- meta: end_play
+
 
 - include: httpd_reverse_proxy_config.yml
   when: httpd_setup_enable
