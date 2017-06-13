@@ -238,12 +238,12 @@
 
 - name: First-time install admin password
   set_fact:
-    current_nexus_admin_password: 'admin123'
+    nexus_admin_password: 'admin123'
   when: nexus_data_dir_contents.stdout == ""
 
 - name: Subsequent re-provision admin password
   set_fact:
-    current_nexus_admin_password: "{{ nexus_admin_password }}"
+    nexus_admin_password: "{{ nexus_admin_password }}"
   when: nexus_data_dir_contents.stdout != ""
   no_log: true
 

@@ -25,7 +25,7 @@ The nexus version and package to install, see available versions at https://www.
 
     nexus_download_dir: '/tmp'
     
-Directory on target where the nexus package will be downloaded.
+Directory on target where the nexus package will be downloaded. The context path needs a trailing slash.
 
     nexus_default_port: 8081
     nexus_default_context_path: '/'

@@ -1,0 +1,12 @@
+---
+# The user shouldn't have any reason to modify the variables here. Consider them constants.
+# Role variables that are intended to be overwritten live in defaults/main.yml.
+# See https://stackoverflow.com/questions/29127560/whats-the-difference-between-defaults-and-vars-in-an-ansible-role
+
+# The endpoint for operations against the Nexus REST API.
+# See https://books.sonatype.com/nexus-book/reference3/scripting.html#scripting-configuration
+rest_api_endpoint: "http://localhost:{{ nexus_default_port }}{{ nexus_default_context_path }}service/siesta/rest/v1/script"
+
+# The default admin password for Nexus. DON'T CHANGE THIS! This value is baked into the Nexus software.
+# See https://books.sonatype.com/nexus-book/reference3/install.html#access
+nexus_default_admin_password: admin123
