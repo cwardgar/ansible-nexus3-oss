@@ -21,6 +21,7 @@ nexus_backup_log: '/var/log/nexus-backup.log'
 # run ansible-playbook example.yml -e "purge=true"
 
 # Nexus default properties
+application_host: 127.0.0.1  # Accept only from localhost (i.e. Apache), not the rest of the internet.
 nexus_default_port: 8081
 nexus_docker_hosted_port: 9080
 nexus_docker_proxy_port: 9081
@@ -33,7 +34,9 @@ nexus_anonymous_access: false
 public_hostname: 'nexus.vm'
 
 nexus_branding_header: ""
-nexus_branding_footer: "Last provisionned {{ ansible_date_time.iso8601 }}"
+# FIXME: This time is currently rendered in UTC. We'd like it in MDT.
+# Where is 'ansible_date_time' coming from? Controller or host?
+nexus_branding_footer: "Last provisioned {{ ansible_date_time.iso8601 }}"
 
 httpd_setup_enable: false
 httpd_ssl_certificate_file: 'files/nexus.vm.crt'

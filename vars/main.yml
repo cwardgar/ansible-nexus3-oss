@@ -3,6 +3,14 @@
 # Role variables that are intended to be overwritten live in defaults/main.yml.
 # See https://stackoverflow.com/questions/29127560/whats-the-difference-between-defaults-and-vars-in-an-ansible-role
 
+# The directory in which Nexus is installed. It is created when we unpack 'nexus_package'.
+nexus_home_dir: "{{ nexus_installation_dir }}/nexus-{{ nexus_version }}"
+
+# The initial directory where Nexus writes its application data. It is also created when we unpack 'nexus_package'.
+# It doesn't remain, however. {{ sonatype_work_dir }}/nexus3/ is copied to {{ nexus_data_dir }} and then
+# {{ sonatype_work_dir }} is deleted.
+sonatype_work_dir: "{{ nexus_installation_dir }}/sonatype-work"
+
 # The endpoint for operations against the Nexus REST API.
 # See https://books.sonatype.com/nexus-book/reference3/scripting.html#scripting-configuration
 rest_api_endpoint: "http://localhost:{{ nexus_default_port }}{{ nexus_default_context_path }}service/siesta/rest/v1/script"
