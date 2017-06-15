@@ -138,6 +138,10 @@
     with_items: "{{ nexus_repos_npm_group }}"
   when: nexus_config_npm
 
+- include: create_repo_gitlfs_hosted_each.yml
+  with_items: "{{ nexus_repos_gitlfs_hosted }}"
+  when: nexus_config_gitlfs
+
 - include: call_script.yml
   vars:
     script_name: setup_anonymous_access
