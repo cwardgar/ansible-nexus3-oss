@@ -7,12 +7,16 @@ configuration = new Configuration(
         repositoryName: parsed_args.name,
         recipeName: 'maven2-group',
         online: true,
+        
         attributes: [
+                // See org.sonatype.nexus.repository.group.GroupFacetImpl.Config
                 group  : [
                         memberNames: parsed_args.member_repos
                 ],
+                // See org.sonatype.nexus.repository.storage.StorageFacetImpl.Config
                 storage: [
                         blobStoreName: parsed_args.blob_store,
+                        // 'writePolicy' only applies to hosted repos.
                         strictContentTypeValidation: Boolean.valueOf(parsed_args.strict_content_validation)
                 ]
         ]

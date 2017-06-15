@@ -7,11 +7,14 @@ configuration = new Configuration(
         repositoryName: parsed_args.name,
         recipeName: 'maven2-hosted',
         online: true,
+        
         attributes: [
+                // See org.sonatype.nexus.repository.maven.internal.MavenFacetImpl.Config
                 maven  : [
                         versionPolicy: parsed_args.version_policy.toUpperCase(),
                         layoutPolicy : parsed_args.layout_policy.toUpperCase()
                 ],
+                // See org.sonatype.nexus.repository.storage.StorageFacetImpl.Config
                 storage: [
                         writePolicy: parsed_args.write_policy.toUpperCase(),
                         blobStoreName: parsed_args.blob_store,

@@ -7,7 +7,9 @@ configuration = new Configuration(
         repositoryName: parsed_args.name,
         recipeName: 'raw-hosted',
         online: true,
+        
         attributes: [
+                // See org.sonatype.nexus.repository.storage.StorageFacetImpl.Config
                 storage: [
                         writePolicy: parsed_args.write_policy.toUpperCase(),
                         blobStoreName: parsed_args.blob_store,

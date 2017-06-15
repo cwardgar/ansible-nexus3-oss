@@ -36,5 +36,15 @@
             <artifactId>nexus-script-plugin</artifactId>
             <version>${nx-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-scheduling</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-repository-maven</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
     </dependencies>
 </project>
