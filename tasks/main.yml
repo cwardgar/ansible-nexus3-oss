@@ -37,6 +37,7 @@
     - name: "{{ nexus_blob_names.bower.blob }}"
     - name: "{{ nexus_blob_names.npm.blob }}"
     - name: "{{ nexus_blob_names.mvn.blob }}"
+    - name: "{{ nexus_blob_names.gitlfs.blob }}"
   when: nexus_delete_default_blobstore
 
 - include: setup_ldap_each.yml
