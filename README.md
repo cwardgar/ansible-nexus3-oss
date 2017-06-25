@@ -28,9 +28,9 @@ The nexus version and package to install, see available versions at https://www.
 Directory on target where the nexus package will be downloaded. The context path needs a trailing slash.
 
     nexus_default_port: 8081
-    nexus_default_context_path: '/'
+    nexus_default_context_path: ''
 
-Port and context path of the java nexus process. `nexus_default_context_path` has to keep the trailing slash when set, for ex. : `nexus_default_context_path: '/nexus/'`.
+Port and context path of the java nexus process. `nexus_default_context_path` should not have a trailing slash, e.g. `nexus_default_context_path: '/nexus'`.
 
     nexus_os_group: 'nexus'
     nexus_os_user: 'nexus'
