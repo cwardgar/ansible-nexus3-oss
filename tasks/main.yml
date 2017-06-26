@@ -3,13 +3,13 @@
   when: ((purge is defined) and (purge | bool))
 
 - include: nexus_install.yml
-  tags: ['install']
+  tags: [ install ]
 
 - include: admin_password_setup.yml
-  tags: ['password']
+  tags: [ password ]
 
 - include: declare_scripts.yml
-  tags: ['declare']
+  tags: [ declare ]
 
 - include: httpd_reverse_proxy_config.yml
   when: httpd_setup_enable
