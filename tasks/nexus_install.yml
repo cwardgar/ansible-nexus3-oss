@@ -60,35 +60,47 @@
     dest: "{{ nexus_data_dir }}/etc/nexus.properties"
     owner: "{{ nexus_os_user }}"
     group: "{{ nexus_os_group }}"
+  notify: restart nexus
 
 - name: Set Nexus VM options
   template:
     src: nexus.vmoptions
     dest: "{{ nexus_home_dir }}/bin/nexus.vmoptions"
+  notify: restart nexus
 
 # See https://books.sonatype.com/nexus-book/reference3/install.html#service-linux
 - name: Install Nexus as a service
   block:
-  # I'm not sure if we even need to do this, but it's part of the installation instructions.
-  # This doesn't set NEXUS_HOME for the current session. Is that okay? Should we source the file?
-  - name: Set NEXUS_HOME for the service user
-    lineinfile:
-      path: "/home/{{ nexus_os_user }}/.bashrc"
-      regexp: "^export NEXUS_HOME=.*"
-      line: "export NEXUS_HOME={{ nexus_home_dir }}"
+    # I'm not sure if we even need to do this, but it's part of the installation instructions.
+    # This doesn't set NEXUS_HOME for the current session. Is that okay? Should we source the file?
+    - name: Set NEXUS_HOME for the service user
+      lineinfile:
+        path: "/home/{{ nexus_os_user }}/.bashrc"
+        regexp: "^export NEXUS_HOME=.*"
+        line: "export NEXUS_HOME={{ nexus_home_dir }}"
+      notify: restart nexus
 
-  - name: Set Nexus user
-    template:
-      src: nexus.rc
-      dest: "{{ nexus_home_dir }}/bin/nexus.rc"
+    - name: Set Nexus user
+      template:
+        src: nexus.rc
+        dest: "{{ nexus_home_dir }}/bin/nexus.rc"
+      notify: restart nexus
 
-  - name: Create systemd service configuration
-    template:
-      src: "nexus.service"
-      dest: "/etc/systemd/system"
+    - name: Create systemd service configuration
+      template:
+        src: "nexus.service"
+        dest: "/etc/systemd/system"
+      notify: restart nexus
 
 - name: Finish installation of Nexus service, enable it, and start it
   systemd: name=nexus daemon_reload=yes enabled=yes state=started
+
+# Ordinarily, handlers run at the end of a play. However, we need our 'restart nexus' handler to run sooner
+# because subsequent tasks access Nexus using its REST API, and they may depend on Nexus being configured with the
+# updated values.
+# In order for 'restart nexus' to work, I think the Nexus service needs to be installed, which the last task performs.
+- name: Run 'restart nexus' handler, if necessary, before accessing REST API.
+  meta: flush_handlers
 
 - name: Wait for Nexus to be ready. Could take over a minute on Docker.
   wait_for: "port={{ nexus_default_port }}"

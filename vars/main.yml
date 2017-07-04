@@ -11,12 +11,13 @@ nexus_home_dir: "{{ nexus_installation_dir }}/nexus-{{ nexus_version }}"
 # {{ sonatype_work_dir }} is deleted.
 sonatype_work_dir: "{{ nexus_installation_dir }}/sonatype-work"
 
-# The base URL of the Nexus server. It does NOT include a trailing slash.
-nexus_base_url: "http://{{ ansible_host }}:{{ nexus_default_port }}{{ nexus_default_context_path }}"
+# The private base URL of the Nexus server. It is available only to clients on the same machine.
+# It should NOT include a trailing slash.
+nexus_private_base_url: "http://127.0.0.1:{{ nexus_default_port }}{{ nexus_default_context_path }}"
 
 # The endpoint for operations against the Nexus REST API.
 # See https://books.sonatype.com/nexus-book/reference3/scripting.html#scripting-configuration
-rest_api_endpoint: "{{ nexus_base_url }}/service/siesta/rest/v1/script"
+rest_api_endpoint: "{{ nexus_private_base_url }}/service/siesta/rest/v1/script"
 
 # The default admin password for Nexus. DON'T CHANGE THIS! This value is baked into the Nexus software.
 # See https://books.sonatype.com/nexus-book/reference3/install.html#access

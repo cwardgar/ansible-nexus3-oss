@@ -1,4 +1,4 @@
 ---
-  # Currently not used anywhere. Not sure if I'll ever use it, since my server will be immutable.
-- name: restart nexus
-  systemd: name=nexus state=restarted
+- name: Restart Nexus.
+  service: name=nexus state=restarted
+  listen: restart nexus  # This string should appear next to "notify:".
