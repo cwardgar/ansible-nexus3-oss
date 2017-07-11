@@ -1,0 +1,40 @@
+---
+- name: Update apt cache if needed.
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600  # Update cache if it's been over an hour since the last update.
+
+- name: Install required dependencies.
+  apt: "name={{ item }} state=latest"
+  with_items:
+    - curl    # For determining latest available version of Nexus.
+    - rsync   # For copying default Nexus work dir to proper location.
+
+- name: Find existing Nexus home directory.
+  find:
+    paths: "{{ nexus_installation_dir }}"
+    file_type: directory
+    patterns: nexus-*
+  register: find_output
+
+- name: Extract installed version of Nexus from existing home directory path.
+  set_fact:
+    # regex_replace is an undocumented Jinja2 filter. See https://goo.gl/sF7quy
+    installed_nexus_version: "{{ find_output.files[0].path | regex_replace('.*nexus-([0-9.-]+)$', '\\1') }}"
+  when: find_output.matched > 0
+
+- name: Find latest Unix download URL, following all redirects to final value.
+  # See https://stackoverflow.com/questions/3074288/get-url-after-redirect#comment71496988_5300429
+  command: >
+    curl --silent --location --head --output /dev/null --write-out '%{url_effective}'
+    http://download.sonatype.com/nexus/3/latest-unix.tar.gz
+  args:
+    # Without this, Ansible will warn: "Consider using get_url or uri module rather than running curl".
+    # However, those 2 modules can't do what we need here.
+    warn: false
+  register: curl_output
+  changed_when: false  # Task is purely informational; it doesn't change anything.
+
+- name: Extract latest version of Nexus from download URL.
+  set_fact:
+    latest_nexus_version: "{{ curl_output.stdout | regex_replace('.*nexus-([0-9.-]+)-unix.tar.gz$', '\\1') }}"

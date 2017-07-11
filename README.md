@@ -18,10 +18,10 @@ All configuration can be updated by re-running the role, except for the [blobsto
 Ansible variables, along with the default values (see `default/main.yml`) :
 
     nexus_version: '3.1.0-04'
-    nexus_timezone: 'UTC'
     nexus_package: "nexus-{{ nexus_version }}-unix.tar.gz"
 
-The nexus version and package to install, see available versions at https://www.sonatype.com/download-oss-sonatype . `nexus_timezone` is a Java Timezone name and can be useful in combination with `nexus_scheduled_tasks` cron expressions below.
+The nexus version and package to install. If `nexus_version` is set to `'latest'`, the latest available version will be determined and installed.
+If an older version of Nexus was previously installed, nothing will be done. We don't (yet?) support upgrading.
 
     nexus_download_dir: '/tmp'
     
@@ -294,7 +294,6 @@ The java and httpd requirements /can/ be fulfilled with the following galaxy rol
 
   vars:
     nexus_version: '3.1.0-04'
-    nexus_timezone: 'Canada/Eastern'
     nexus_admin_password: "{{ vault_nexus_admin_password }}"
     httpd_server_name: 'nexus.vm'
     httpd_setup_enable: true

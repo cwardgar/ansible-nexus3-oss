@@ -1,4 +1,7 @@
 ---
+- include: tasks/init.yml
+  tags: [ always ]
+
 - include: nexus_purge.yml
   when: ((purge is defined) and (purge | bool))
 

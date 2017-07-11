@@ -1,4 +1,18 @@
 ---
+- name: Set Nexus version.
+  set_fact:
+    # We're doing a multi-line YAML string using the "Flow" scalar style
+    # (see https://stackoverflow.com/a/21699210/3874643). It creates one long line, converting newlines to spaces.
+    # Unfortunately, that results in leading and trailing spaces in the variable value. We strip those with the
+    # minus signs in the variable expressions. See https://stackoverflow.com/a/31062060/3874643.
+    nexus_version: "{% if installed_nexus_version is defined %}
+                      {{- installed_nexus_version -}}
+                    {% elif nexus_version == 'latest' %}
+                      {{- latest_nexus_version -}}
+                    {% else %}
+                      {{- nexus_version -}}
+                    {% endif %}"
+
 - name: Ensure Nexus o/s group exists
   group:
     name: "{{ nexus_os_group }}"
@@ -32,12 +46,12 @@
   block:
     # As of ansible 2.3.0.0, there's no better way to recursively copy files when both src and dest are on the
     # remote machine. See https://stackoverflow.com/questions/25576871
-  - name: copy default data directory to nexus_data_dir and change ownership
+  - name: Copy default data directory to nexus_data_dir and change ownership.
     command: >  # YAML multi-line, folded string. See https://stackoverflow.com/a/3790497/3874643
       rsync --archive --chown={{ nexus_os_user }}:{{ nexus_os_group }}
       {{ sonatype_work_dir }}/nexus3/ {{ nexus_data_dir }}
 
-  - name: delete default data directory
+  - name: Delete default data directory.
     file:
       path: "{{ sonatype_work_dir }}"
       state: absent
