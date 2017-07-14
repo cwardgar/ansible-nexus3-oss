@@ -1,5 +1,5 @@
 ---
-- include: tasks/init.yml
+- include: init.yml
   tags: [ always ]
 
 - include: nexus_purge.yml
