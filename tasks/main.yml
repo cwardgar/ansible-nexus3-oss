@@ -170,5 +170,11 @@
         footerEnabled: "{{ nexus_branding_footer != '' }}"
         headerEnabled: "{{ nexus_branding_header != '' }}"
 
-- include: create_task_each.yml
+- name: Setup scheduled tasks.
+  include: call_script.yml
+  vars:
+    script_name: tasks
+    args:
+      methodName: create
+      methodArgs: "{{ item }}"
   with_items: "{{ nexus_scheduled_tasks }}"

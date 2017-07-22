@@ -10,40 +10,399 @@
     <description>Fake project meant to be imported in an IDE (IntelliJ) to edit groovy scripts with classpath-aware completion</description>
 
     <properties>
-        <nx-version>3.3.1-01</nx-version>
+        <nx-version>3.4.0-02</nx-version>
     </properties>
     <build>
         <sourceDirectory>files/groovy</sourceDirectory>
     </build>
+    
     <dependencies>
+        <!-- These come from the Nexus root POM.
+             See https://github.com/sonatype/nexus-public/blob/release-3.4.0-02/pom.xml-->
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-analytics-api</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-audit</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-base</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-blobstore</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-blobstore-api</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-blobstore-file</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-bootstrap</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-capability</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-commands</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-common</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
         <dependency>
             <groupId>org.sonatype.nexus</groupId>
             <artifactId>nexus-core</artifactId>
             <version>${nx-version}</version>
         </dependency>
+    
         <dependency>
             <groupId>org.sonatype.nexus</groupId>
-            <artifactId>nexus-script</artifactId>
+            <artifactId>nexus-crypto</artifactId>
             <version>${nx-version}</version>
         </dependency>
+    
         <dependency>
             <groupId>org.sonatype.nexus</groupId>
-            <artifactId>nexus-security</artifactId>
+            <artifactId>nexus-orient</artifactId>
             <version>${nx-version}</version>
         </dependency>
+    
         <dependency>
-            <groupId>org.sonatype.nexus.plugins</groupId>
-            <artifactId>nexus-script-plugin</artifactId>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-orient-console</artifactId>
             <version>${nx-version}</version>
         </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-cache</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-elasticsearch</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-email</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-extdirect</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-extender</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-httpclient</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-jmx</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
         <dependency>
             <groupId>org.sonatype.nexus</groupId>
             <artifactId>nexus-scheduling</artifactId>
             <version>${nx-version}</version>
         </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-formfields</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-guice-servlet</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-main</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-mime</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-oss-edition</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-oss-edition</artifactId>
+            <version>${nx-version}</version>
+            <classifier>features</classifier>
+            <type>xml</type>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-pax-logging</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-plugin-api</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-quartz</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-rapture</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-rapture</artifactId>
+            <version>${nx-version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-repository</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-rest</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-rest-client</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-rest-jackson2</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-script</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-security</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-selector</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-servlet</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-siesta</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-ssl</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-supportzip-api</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-swagger</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <!-- Not available on Maven Central. -->
+        <!--<dependency>-->
+            <!--<groupId>org.sonatype.nexus</groupId>-->
+            <!--<artifactId>nexus-task-logging</artifactId>-->
+            <!--<version>${nx-version}</version>-->
+        <!--</dependency>-->
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-thread</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-transaction</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-upgrade</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-validation</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-webhooks</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-webresources-api</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <!-- testsupport -->
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-pax-exam</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-test-common</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+        
+
+        <!-- Plugins. See https://github.com/sonatype/nexus-public/blob/master/plugins/pom.xml -->
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-audit-plugin</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-blobstore-compact</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-blobstore-restore</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-coreui-plugin</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-repository-httpbridge</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
         <dependency>
             <groupId>org.sonatype.nexus.plugins</groupId>
             <artifactId>nexus-repository-maven</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-repository-raw</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-script-plugin</artifactId>
+            <version>${nx-version}</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-ssl-plugin</artifactId>
             <version>${nx-version}</version>
         </dependency>
     </dependencies>
