@@ -4,14 +4,14 @@
     # We're doing a multi-line YAML string using the "Flow" scalar style
     # (see https://stackoverflow.com/a/21699210/3874643). It creates one long line, converting newlines to spaces.
     # Unfortunately, that results in leading and trailing spaces in the variable value. We strip those with the
-    # minus signs in the variable expressions. See https://stackoverflow.com/a/31062060/3874643.
-    nexus_version: "{% if installed_nexus_version is defined %}
-                      {{- installed_nexus_version -}}
-                    {% elif nexus_version == 'latest' %}
-                      {{- latest_nexus_version -}}
-                    {% else %}
-                      {{- nexus_version -}}
-                    {% endif %}"
+    # minus signs in the statement delimiters. See https://stackoverflow.com/a/31062060/3874643.
+    nexus_version: "{%- if installed_nexus_version is defined -%}
+                      {{ installed_nexus_version }}
+                    {%- elif nexus_version == 'latest' -%}
+                      {{ latest_nexus_version }}
+                    {%- else -%}
+                      {{ nexus_version }}
+                    {%- endif -%}"
 
 - name: Ensure Nexus o/s group exists
   group:
