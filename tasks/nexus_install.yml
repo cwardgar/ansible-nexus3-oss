@@ -66,7 +66,7 @@
   with_items:
   - "{{ nexus_data_dir }}/etc"  # Will create "nexus.properties" in this directory.
   - "{{ nexus_tmp_dir }}"       # Appears in nexus.vmoptions.
-  - "{{ nexus_backup_dir }}"    # Appears in nexus.vmoptions.
+  - "{{ nexus_backup_dir }}"    # Database backups go here.
 
 - name: Set application properties
   template:
@@ -118,15 +118,3 @@
 
 - name: Wait for Nexus to be ready. Could take over a minute on Docker.
   wait_for: "port={{ nexus_default_port }}"
-
-
-# TODO: This bit is from the original nexus_install.yml. It could still be useful in some form.
-
-#- name: "Config nexus-backup shell cron"
-#  cron:
-#    name: "Backup nexus Blobstore"
-#    minute: "1"
-#    hour: "21"
-#    job: "/sbin/nexus-blob-backup.sh 2>&1 | tee {{ nexus_backup_log }}"
-#    state: present
-#    user: "root"

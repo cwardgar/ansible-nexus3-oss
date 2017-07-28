@@ -9,15 +9,6 @@ nexus_installation_dir: '/opt'
 nexus_data_dir: '/var/nexus'
 nexus_tmp_dir: '/tmp/nexus'
 nexus_script_dir: '{{ nexus_installation_dir }}/nexus-{{ nexus_version }}/etc/scripts'
-nexus_restore_log: '/var/log/nexus-restore.log'
-nexus_backup_log: '/var/log/nexus-backup.log'
-
-# Nexus restore procedure:
-# run ansible-playbook example.yml -e "nexus_restore_point=(# date of choice -> %y-%m-%d #)"
-# nexus_restore_point: '17-02-22' # Example format
-
-# Nexus purge procedure:
-# run ansible-playbook example.yml -e "purge=true"
 
 # Nexus default properties
 application_host: 127.0.0.1  # Accept only from localhost (i.e. Apache), not the rest of the internet.
@@ -152,20 +143,21 @@ nexus_repos_maven_group:
       - central
       - jboss
 
-
 nexus_scheduled_tasks:
-  - name: db-backup # Note: CRON must be aligned to nexus-blob-backup.sh cron schedule. -> Task: "Config nexus-backup shell cron"
-    cron: '0 0 21 * * ?'
+  - name: db-backup
     typeId: db.backup
-    taskProperties:
+    schedule: advanced
+    cronExpression: '0 0 21 * * ?'
+    properties:
       location: "{{ nexus_backup_dir }}/"
 
 
 #  example task to compact blobstore :
 #  - name: compact-blobstore
-#    cron: '0 0 22 * * ?'
 #    typeId: blobstore.compact
-#    taskProperties:
+#    schedule: advanced
+#    cronExpression: '0 0 22 * * ?'
+#    properties:
 #      blobstoreName: 'default' # all task attributes are stored as strings by nexus internally
 
 _nexus_privilege_defaults:
