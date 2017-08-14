@@ -8,6 +8,7 @@ ExecStart={{ nexus_home_dir }}/bin/nexus start
 ExecStop={{ nexus_home_dir }}/bin/nexus stop
 User={{ nexus_os_user }}
 Restart=on-abort
+LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target

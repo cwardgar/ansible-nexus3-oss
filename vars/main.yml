@@ -13,7 +13,7 @@ sonatype_work_dir: "{{ nexus_installation_dir }}/sonatype-work"
 
 # The private base URL of the Nexus server. It is available only to clients on the same machine.
 # It should NOT include a trailing slash.
-nexus_private_base_url: "http://127.0.0.1:{{ nexus_default_port }}{{ nexus_default_context_path }}"
+nexus_private_base_url: "http://{{ application_host }}:{{ nexus_default_port }}{{ nexus_default_context_path }}"
 
 # The endpoint for operations against the Nexus REST API.
 # See https://books.sonatype.com/nexus-book/reference3/scripting.html#scripting-configuration

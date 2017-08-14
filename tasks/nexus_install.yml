@@ -48,7 +48,7 @@
     # remote machine. See https://stackoverflow.com/questions/25576871
   - name: Copy default data directory to nexus_data_dir and change ownership.
     command: >  # YAML multi-line, folded string. See https://stackoverflow.com/a/3790497/3874643
-      rsync --archive --chown={{ nexus_os_user }}:{{ nexus_os_group }}
+      rsync --archive --verbose --ignore-existing --chown={{ nexus_os_user }}:{{ nexus_os_group }}
       {{ sonatype_work_dir }}/nexus3/ {{ nexus_data_dir }}
 
   - name: Delete default data directory.
