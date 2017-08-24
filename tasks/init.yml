@@ -1,11 +1,6 @@
 ---
-- name: Update apt cache if needed.
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600  # Update cache if it's been over an hour since the last update.
-
 - name: Install required dependencies.
-  apt: "name={{ item }} state=latest"
+  package: "name={{ item }} state=latest"
   with_items:
     - curl    # For determining latest available version of Nexus.
     - rsync   # For copying default Nexus work dir to proper location.
@@ -19,7 +14,8 @@
 
 - name: Extract installed version of Nexus from existing home directory path.
   set_fact:
-    # regex_replace is an undocumented Jinja2 filter. See https://goo.gl/sF7quy
+    # regex_replace is a Jinja2 filter added by Ansible. See https://goo.gl/sF7quy.
+    # Also see http://docs.ansible.com/ansible/latest/playbooks_filters.html and grep for "regex_replace".
     installed_nexus_version: "{{ find_output.files[0].path | regex_replace('.*nexus-([0-9.-]+)$', '\\1') }}"
   when: find_output.matched > 0
 
