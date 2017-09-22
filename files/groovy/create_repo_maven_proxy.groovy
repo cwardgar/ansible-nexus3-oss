@@ -21,7 +21,9 @@ configuration = new Configuration(
                 // See org.sonatype.nexus.repository.proxy.ProxyFacetSupport.Config
                 proxy  : [
                         remoteUrl: parsed_args.remote_url,
-                        contentMaxAge: 1440.0,
+                        // How long (in minutes) to cache artifacts before rechecking the remote repository.
+                        // Release repositories should use -1.
+                        contentMaxAge: parsed_args.version_policy.toUpperCase() == 'RELEASE' ? -1.0 : 1440.0,
                         metadataMaxAge: 1440.0
                 ],
                 // See org.sonatype.nexus.repository.storage.StorageFacetImpl.Config
