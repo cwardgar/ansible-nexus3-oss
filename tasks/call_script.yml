@@ -12,5 +12,3 @@
     body: "{{ args | to_json }}"
     return_content: yes
   register: webpage
-  changed_when: "'CHANGED' in webpage.content"
-  failed_when: "'FAILED' in webpage.content"

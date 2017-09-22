@@ -14,7 +14,6 @@ All configuration can be updated by re-running the role, except for the [blobsto
 
 ## Role Variables
 
-
 Ansible variables, along with the default values (see `default/main.yml`) :
 
     nexus_version: '3.1.0-04'
@@ -42,6 +41,13 @@ User and group used to own the nexus files and run the service, those will be cr
     nexus_tmp_dir: '/tmp/nexus'
 
 Nexus directories, `nexus_installation_dir` contains the installed executable(s), `nexus_data_dir` contains all configuration, repositories and uploaded artifacts. Note: custom blobstores paths outside of `nexus_data_dir` can be configured, see `nexus_blobstores` below.
+
+    nexus_min_heap_size: 1200M
+    nexus_max_heap_size: 1200M
+    nexus_max_direct_memory_size: 2G
+
+Memory sizing configuration for the JVM on which Nexus will run. See [recommended values](
+https://help.sonatype.com/display/NXRM3/System+Requirements#SystemRequirements-ExampleMaximumMemoryConfigurations).
 
     nexus_admin_password: 'changeme'
 

@@ -324,3 +324,14 @@ _nexus_repos_gitlfs_defaults:
 nexus_repos_gitlfs_hosted:
   - name: gitlfs-internal
     blob_store: "{{ nexus_blob_names.gitlfs.blob }}"
+
+
+# JVM memory sizing. These values are used in nexus.vmoptions and correspond to the "4GB Physical Memory" config:
+# https://help.sonatype.com/display/NXRM3/System+Requirements#SystemRequirements-ExampleMaximumMemoryConfigurations
+
+# See https://docs.oracle.com/cd/E15289_01/doc.40/e15062/optionx.htm#i1027398
+nexus_min_heap_size: 1200M
+# https://docs.oracle.com/cd/E15289_01/doc.40/e15062/optionx.htm#i1027399
+nexus_max_heap_size: 1200M
+# See https://docs.oracle.com/cd/E15289_01/doc.40/e15062/optionxx.htm#BABGCFFB
+nexus_max_direct_memory_size: 2G
