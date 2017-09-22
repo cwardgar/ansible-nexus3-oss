@@ -1,6 +1,6 @@
 ---
 - name: Declare Groovy scripts on the server
-  include: declare_script_each.yml
+  include_tasks: declare_script_each.yml
   with_items:
     - setup_ldap
     - setup_anonymous_access
