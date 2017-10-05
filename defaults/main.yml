@@ -200,10 +200,12 @@ nexus_repos_pypi_proxy:
 
 _nexus_repos_raw_defaults:
   blob_store: "{{ nexus_blob_names.raw.blob }}"
-  strict_content_validation: true
   version_policy: release # release, snapshot or mixed
   layout_policy: strict # strict or permissive
   write_policy: allow_once # allow_once or allow
+  # See https://issues.sonatype.org/browse/NEXUS-10087 for why this has to be 'false'.
+  # Besides, raw repos are supposed to allow any type of file, so this being 'true' doesn't make sense anyway.
+  strict_content_validation: false
 
 nexus_repos_raw_proxy:
   - name: ubuntu-archive
