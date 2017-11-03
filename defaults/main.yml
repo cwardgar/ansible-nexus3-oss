@@ -337,3 +337,6 @@ nexus_min_heap_size: 1200M
 nexus_max_heap_size: 1200M
 # See https://docs.oracle.com/cd/E15289_01/doc.40/e15062/optionxx.htm#BABGCFFB
 nexus_max_direct_memory_size: 2G
+
+# The time to wait, in seconds, before we should timeout while waiting for Nexus to restart.
+nexus_restart_timeout: 120

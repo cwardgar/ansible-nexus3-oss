@@ -117,4 +117,4 @@
   meta: flush_handlers
 
 - name: Wait for Nexus to be ready. Could take over a minute on Docker.
-  wait_for: "port={{ nexus_default_port }} timeout=120"
+  wait_for: "port={{ nexus_default_port }} timeout={{ nexus_restart_timeout }}"
