@@ -17,7 +17,7 @@ nexus_private_base_url: "http://{{ application_host }}:{{ nexus_default_port }}{
 
 # The endpoint for operations against the Nexus REST API.
 # See https://books.sonatype.com/nexus-book/reference3/scripting.html#scripting-configuration
-rest_api_endpoint: "{{ nexus_private_base_url }}/service/siesta/rest/v1/script"
+rest_api_endpoint: "{{ nexus_private_base_url }}/service/rest/v1/script"
 
 # The default admin password for Nexus. DON'T CHANGE THIS! This value is baked into the Nexus software.
 # See https://books.sonatype.com/nexus-book/reference3/install.html#access
