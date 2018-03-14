@@ -402,6 +402,9 @@ License
 
 GNU GPLv3
 
+Code for configuring the email server was copied from the "ansible-ThoTeam/nexus3-oss" fork, specifically:
+https://github.com/ansible-ThoTeam/nexus3-oss/pull/1.
+
 Author Information
 ------------------
 
