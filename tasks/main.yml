@@ -1,17 +1,17 @@
 ---
-- include_tasks: init.yml
+- import_tasks: init.yml
   tags: [ always ]
 
-- include_tasks: nexus_install.yml
+- import_tasks: nexus_install.yml
   tags: [ install ]
 
-- include_tasks: admin_password_setup.yml
+- import_tasks: admin_password_setup.yml
   tags: [ password ]
 
-- include_tasks: declare_scripts.yml
+- import_tasks: declare_scripts.yml
   tags: [ declare ]
 
-- include_tasks: httpd_reverse_proxy_config.yml
+- import_tasks: httpd_reverse_proxy_config.yml
   when: httpd_setup_enable
 
 - name: Deleting default repositories
@@ -138,19 +138,19 @@
   with_items: "{{ nexus_repos_gitlfs_hosted }}"
   when: nexus_config_gitlfs
 
-- include_tasks: call_script.yml
+- import_tasks: call_script.yml
   vars:
     script_name: setup_anonymous_access
     args:
       anonymous_access: "{{ nexus_anonymous_access }}"
 
-- include_tasks: call_script.yml
+- import_tasks: call_script.yml
   vars:
     script_name: setup_base_url
     args:
       base_url: "https://{{ public_hostname }}/"
 
-- include_tasks: call_script.yml
+- import_tasks: call_script.yml
   vars:
     script_name: setup_email
     args:
@@ -168,7 +168,7 @@
       email_trust_store_enabled: "{{ nexus_email_trust_store_enabled }}"
 
 - name: Configure branding capability
-  include_tasks: call_script.yml
+  import_tasks: call_script.yml
   vars:
     script_name: setup_capability
     args:
